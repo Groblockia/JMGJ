@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bd8jb354qchfq"]
+[gd_scene load_steps=6 format=3 uid="uid://bd8jb354qchfq"]
 
 [ext_resource type="Script" uid="uid://ltchefmnw5hs" path="res://Player/scripts/player.gd" id="1_l8h54"]
-[ext_resource type="Script" uid="uid://b7bl3nakjw140" path="res://Player/scripts/camera_3d.gd" id="2_4ntmi"]
+[ext_resource type="Script" uid="uid://b7bl3nakjw140" path="res://Player/scripts/camera_script.gd" id="2_4ntmi"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_l8h54"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4ntmi"]
+size = Vector3(0.5, 0.5, 0.5)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_l8h54")
@@ -16,6 +19,13 @@ shape = SubResource("CapsuleShape3D_hvfyp")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_l8h54")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1.5, 2)
+[node name="camera_pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("2_4ntmi")
+
+[node name="Camera3D" type="Camera3D" parent="camera_pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.08616e-07, 0, -2.08616e-07, 1, 0, 0, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+mesh = SubResource("BoxMesh_4ntmi")

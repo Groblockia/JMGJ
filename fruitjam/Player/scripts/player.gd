@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+class_name Player
+
 var state_machine: StateMachine
 var gravity = 9.8
 
@@ -22,9 +24,16 @@ func _ready() -> void:
 	state_machine.add_state("fall", FallState.new())
 	
 	state_machine.set_initial_state("idle")
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _process(delta: float) -> void:
 	state_machine.update(delta)
+	
+	if Input.is_action_just_pressed("mouse_toggle"):
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta: float) -> void:
 	state_machine.physics_update(delta)
