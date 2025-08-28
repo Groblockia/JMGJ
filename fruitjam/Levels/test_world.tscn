@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bxe5gn33fqg1x"]
+[gd_scene load_steps=7 format=3 uid="uid://bxe5gn33fqg1x"]
 
 [ext_resource type="Texture2D" uid="uid://buklkwu0tndlc" path="res://assets/icon.svg" id="1_s7fsy"]
 [ext_resource type="PackedScene" uid="uid://bd8jb354qchfq" path="res://Player/player.tscn" id="2_50dj4"]
-[ext_resource type="PackedScene" uid="uid://bvnwnij48v55k" path="res://Scenes/fruits/fruit_test/fruit_test.tscn" id="3_of68j"]
-[ext_resource type="PackedScene" uid="uid://dh75pbyah3f2p" path="res://Scenes/trees/tree_test.tscn" id="4_mggor"]
+[ext_resource type="PackedScene" uid="uid://dh75pbyah3f2p" path="res://Scenes/trees/tree_test/tree_test.tscn" id="4_mggor"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_50dj4"]
 size = Vector3(100, 0.5, 100)
@@ -29,9 +28,6 @@ mesh = SubResource("BoxMesh_mggor")
 
 [node name="Player" parent="." instance=ExtResource("2_50dj4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.70505, 0)
-
-[node name="fruit_test" parent="." instance=ExtResource("3_of68j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -5)
 
 [node name="tree_test" parent="." instance=ExtResource("4_mggor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
