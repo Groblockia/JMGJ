@@ -6,11 +6,10 @@ var character: CharacterBody3D
 
 func enter(prev_state: String = "") -> void:
 	character = state_machine.owner
-	print("entering fall state")
+	#print("entering fall state")
 	
 
 func physics_update(delta) -> void:
-	print("tomber dans le vide vide")
 	character.velocity.y -= character.gravity * delta
 	
 	character.velocity.x = lerp(character.velocity.x, 

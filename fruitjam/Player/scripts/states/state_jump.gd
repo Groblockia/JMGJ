@@ -6,7 +6,7 @@ var character: CharacterBody3D
 
 func enter(prev_state: String = "") -> void:
 	character = state_machine.owner
-	print("entering jump state")
+	#print("entering jump state")
 	character.velocity.y = character.JUMP_VELOCITY
 
 

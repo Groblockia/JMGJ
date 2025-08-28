@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3k1c545xvka2"]
+
+[ext_resource type="Script" uid="uid://dii3no1i6wuxe" path="res://Scenes/fruits/fruit_test/squished_fruit_test.gd" id="1_8b4om"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mo5b5"]
+albedo_color = Color(0.76, 0.0608, 0.0608, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_8b4om"]
+material = SubResource("StandardMaterial3D_mo5b5")
+radius = 0.24
+height = 0.58
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xm5ic"]
+albedo_color = Color(0.29, 0.145, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qdrty"]
+material = SubResource("StandardMaterial3D_xm5ic")
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.145
+
+[node name="squished_fruit_test" type="Node3D"]
+script = ExtResource("1_8b4om")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.35, 0, 0, 0, 1, 0.00123504, -0.161514, -0.00152767)
+mesh = SubResource("SphereMesh_8b4om")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.989016, -0.147809, 0, 0.145094, 0.970845, -0.190809, 0.0282034, 0.188713, 0.981627, 0, -0.0351108, 0)
+mesh = SubResource("CylinderMesh_qdrty")
+skeleton = NodePath("")
+
+[node name="despawn_timer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[connection signal="timeout" from="despawn_timer" to="." method="_on_despawn_timer_timeout"]

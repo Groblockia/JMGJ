@@ -6,7 +6,7 @@ var character: CharacterBody3D
 
 func enter(prev_state: String = "") -> void:
 	character = state_machine.owner
-	print("entering idle state")
+	#print("entering idle state")
 	
 func physics_update(delta) -> void:
 	character.velocity.x = lerp(character.velocity.x, 0.0,

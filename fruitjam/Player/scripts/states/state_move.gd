@@ -6,7 +6,7 @@ var character: CharacterBody3D
 
 func enter(prev_state: String = "") -> void:
 	character = state_machine.owner
-	print("entering walk state")
+	#print("entering walk state")
 
 
 func physics_update(delta) -> void:
