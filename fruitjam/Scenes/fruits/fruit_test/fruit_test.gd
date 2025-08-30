@@ -3,7 +3,7 @@ extends RigidBody3D
 @onready var squished_fruit_test = preload("res://Scenes/fruits/fruit_test/squished_fruit_test.tscn")
 
 func _ready() -> void:
-	pass
+	freeze = true
 
 func _on_body_entered(body: Node) -> void:
 	var layer = body.collision_layer
@@ -18,3 +18,8 @@ func _on_body_entered(body: Node) -> void:
 	#if touching basket:
 	if layer == 6:
 		pass
+
+func fall():
+	$AnimationPlayer.play("shake_before_fall")
+	await $AnimationPlayer.animation_finished
+	freeze = false

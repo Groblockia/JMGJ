@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvnwnij48v55k"]
+[gd_scene load_steps=10 format=3 uid="uid://bvnwnij48v55k"]
 
 [ext_resource type="Script" uid="uid://r3bwxit4bkv0" path="res://Scenes/fruits/fruit_test/fruit_test.gd" id="1_xm5ic"]
 
@@ -22,6 +22,43 @@ top_radius = 0.03
 bottom_radius = 0.03
 height = 0.145
 
+[sub_resource type="Animation" id="Animation_kay1f"]
+resource_name = "shake_before_fall"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pivot:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.533333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.261799, -2.9229e-09, 0.261799), Vector3(0.26164, 0.130073, -0.195154), Vector3(0.166476, 0.240435, 0.313085), Vector3(-0.0607801, 0.158761, -0.111476)]
+}
+
+[sub_resource type="Animation" id="Animation_khk1u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_khk1u"]
+_data = {
+&"RESET": SubResource("Animation_khk1u"),
+&"shake_before_fall": SubResource("Animation_kay1f")
+}
+
 [node name="fruit_test" type="RigidBody3D"]
 collision_layer = 64
 collision_mask = 33
@@ -32,12 +69,22 @@ script = ExtResource("1_xm5ic")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_mo5b5")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00123504, -0.00187242, -0.00152767)
-mesh = SubResource("SphereMesh_xm5ic")
+[node name="pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.400424, 0)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.305806, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00123504, -0.414932, -0.00152767)
+mesh = SubResource("SphereMesh_xm5ic")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.107254, 0)
 mesh = SubResource("CylinderMesh_nak3b")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_khk1u")
+}
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
